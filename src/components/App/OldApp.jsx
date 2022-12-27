@@ -5,7 +5,6 @@ import React, { Component } from 'react'
 import { Container } from './App.styled';
 import  ContactsData from 'components/ContactsData.json'
 
-// const contacts = JSON.parse(ContactsData);
 const contacts = ContactsData;
 console.log(contacts);
 
