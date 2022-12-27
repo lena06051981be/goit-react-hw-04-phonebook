@@ -1,52 +1,46 @@
 import { Contacts } from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
 import PhonebookForm from 'components/PhonebookForm/PhonebookForm';
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Container } from './App.styled';
 import  ContactsData from 'components/ContactsData.json'
 
 // const contacts = JSON.parse(ContactsData);
-const contacts = ContactsData;
-console.log(contacts);
+// const contacts = ContactsData;
 
-class App extends Component {
-  state = {
-    contacts,
-    // contacts: [
-    //   {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-    //   {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-    //   {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-    //   {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
-    // ],
-    filter: '',
-  }
 
-componentDidMount() {
-    console.log('App componentDidMount');
+const App = () => {
+  const [contacts, setContacts] = useState(ContactsData);
+  const [filter, setFilter] = useState('');
+  console.log(contacts);
+
+
+// componentDidMount() {
+//     console.log('App componentDidMount');
     
-    const localStorageContacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(localStorageContacts);
+//     const localStorageContacts = localStorage.getItem('contacts');
+//     const parsedContacts = JSON.parse(localStorageContacts);
 
-    if (parsedContacts) {
-      this.setState({ contacts: parsedContacts });
-    };
-    // console.log(localStorage);
-  };
+//     if (parsedContacts) {
+//       this.setState({ contacts: parsedContacts });
+//     };
+//     // console.log(localStorage);
+//   };
 
-  // componentDidUpdate(prevProps, prevState) {
+//   // componentDidUpdate(prevProps, prevState) {
 
-  componentDidUpdate(_, prevState) {
-    console.log('App componentDidUpdate');
+//   componentDidUpdate(_, prevState) {
+//     console.log('App componentDidUpdate');
 
-    if (this.state.contacts !== prevState.contacts) {
-      console.log('Обновилось поле contacts')
+//     if (this.state.contacts !== prevState.contacts) {
+//       console.log('Обновилось поле contacts')
 
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-    };
-    // console.log(localStorage);
-  };
+//       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+//     };
+//     // console.log(localStorage);
+//   };
 
-  formSubmitHandler = event => {
+const formSubmitHandler = event => {
     const newContact = {
       id: event.id,
       name: event.name,
@@ -55,7 +49,7 @@ componentDidMount() {
     // const id = event.id;
     // const name = event.name;
     // const number = event.number;
-    const contactsLists = [...this.state.contacts];
+    const contactsLists = [...contacts];
     console.log(event);
 
     if (
@@ -77,16 +71,16 @@ componentDidMount() {
   }
 
   
-  handleDelete = selectedId => {
-    this.setState(prevState => {
+const handleDelete = selectedId => {
+    setContacts(prevState => {
       return {
       contacts: prevState.contacts.filter(contact => contact.id !== selectedId),
       };
     });
   };
 
-  changeFilter = event => {
-    this.setState({ filter: event.currentTarget.value });
+  const changeFilter = event => {
+    setFilter(event.currentTarget.value);
   };  
 
   // getFilteredContacts = () => {
@@ -97,30 +91,31 @@ componentDidMount() {
   //   return filterContactsList;
   // };
   
-  getVisibleContacts = () => {
-    const normalizedFilter = this.state.filter.toLowerCase();   
+// const getVisibleContacts = () => {
+//     const normalizedFilter = setFilter.toLowerCase;   
 
-    return this.state.contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter),
-    );
-  }
+//     return setContacts.filter(contact =>
+//       contact.name.toLowerCase().includes(normalizedFilter),
+//     );
+//   }
 
-  render() {
-    console.log(this.state.contacts);
+  
+    console.log(contacts);
     
     return (
       <Container>
-        <PhonebookForm onSubmit={this.formSubmitHandler} />
+        <PhonebookForm onSubmit={formSubmitHandler} />
         <Filter
-          value={this.state.filter}
-          onFilter={this.changeFilter} />
+          value={filter}
+          onFilter={changeFilter} />
         <Contacts
-          contactsFiltred={this.getVisibleContacts()}
-          handleDelete={this.handleDelete}
+          // contactsFiltred={getVisibleContacts()}
+          contactsFiltred={''}
+          handleDelete={handleDelete}
         ></Contacts>
       </Container>
   )
-}
+
 }
 
 export default App
