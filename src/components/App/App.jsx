@@ -1,44 +1,21 @@
 import { Contacts } from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
 import PhonebookForm from 'components/PhonebookForm/PhonebookForm';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container } from './App.styled';
 import  ContactsData from 'components/ContactsData.json'
 
-// const contacts = JSON.parse(ContactsData);
-// const contacts = ContactsData;
 
+const GET_LS_CONTACTS = JSON.parse(localStorage.getItem('contacts'));
 
 const App = () => {
-  const [contacts, setContacts] = useState(ContactsData);
+  const [contacts, setContacts] = useState(GET_LS_CONTACTS ?? ContactsData);
   const [filter, setFilter] = useState('');
   console.log(contacts);
 
-
-// componentDidMount() {
-//     console.log('App componentDidMount');
-    
-//     const localStorageContacts = localStorage.getItem('contacts');
-//     const parsedContacts = JSON.parse(localStorageContacts);
-
-//     if (parsedContacts) {
-//       this.setState({ contacts: parsedContacts });
-//     };
-//     // console.log(localStorage);
-//   };
-
-//   // componentDidUpdate(prevProps, prevState) {
-
-//   componentDidUpdate(_, prevState) {
-//     console.log('App componentDidUpdate');
-
-//     if (this.state.contacts !== prevState.contacts) {
-//       console.log('Обновилось поле contacts')
-
-//       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-//     };
-//     // console.log(localStorage);
-//   };
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts])
 
 const formSubmitHandler = event => {
     const newContact = {
@@ -46,9 +23,6 @@ const formSubmitHandler = event => {
       name: event.name,
       number: event.number,
     };
-    // const id = event.id;
-    // const name = event.name;
-    // const number = event.number;
     const contactsLists = [...contacts];
     console.log(event);
 
@@ -62,15 +36,6 @@ const formSubmitHandler = event => {
     
     setContacts(state => [ newContact, ...state]);
     console.log("contactsLists: ", contactsLists);
-   
-    // this.setState(({ contacts }) => ({
-    //   contacts: [newContact, ...contacts],
-    // }));    
-
-    // this.setState({contacts: [newContact, contactsLists]})
-    // contactsLists.push({ name, id, number });   
-
-    // this.setState({contacts: contactsLists})
   }
 
   
