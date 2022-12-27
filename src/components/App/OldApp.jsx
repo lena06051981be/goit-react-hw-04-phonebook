@@ -8,7 +8,7 @@ import  ContactsData from 'components/ContactsData.json'
 const contacts = ContactsData;
 console.log(contacts);
 
-class App extends Component {
+class OldApp extends Component {
   state = {
     contacts,
     // contacts: [
@@ -122,4 +122,4 @@ componentDidMount() {
 }
 }
 
-export default App
+export default OldApp;
