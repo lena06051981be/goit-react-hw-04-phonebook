@@ -75,11 +75,9 @@ const formSubmitHandler = event => {
 
   
 const handleDelete = selectedId => {
-    setContacts(prevState => {
-      return {
-      contacts: prevState.contacts.filter(contact => contact.id !== selectedId),
-      };
-    });
+    setContacts(
+      contacts.filter(contact => contact.id !== selectedId),
+    );
   };
 
   const changeFilter = event => {
