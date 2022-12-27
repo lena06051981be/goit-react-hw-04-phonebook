@@ -58,11 +58,14 @@ const formSubmitHandler = event => {
       )) {
       alert(`${newContact.name} is already in contacts.`);
       return;
-    }    
+    } 
+    
+    setContacts(state => [ newContact, ...state]);
+    console.log("contactsLists: ", contactsLists);
    
-    this.setState(({ contacts }) => ({
-      contacts: [newContact, ...contacts],
-    }));    
+    // this.setState(({ contacts }) => ({
+    //   contacts: [newContact, ...contacts],
+    // }));    
 
     // this.setState({contacts: [newContact, contactsLists]})
     // contactsLists.push({ name, id, number });   
@@ -82,14 +85,6 @@ const handleDelete = selectedId => {
   const changeFilter = event => {
     setFilter(event.currentTarget.value);
   };  
-
-  // getFilteredContacts = () => {
-  //   const normalizedFilter = this.state.filter.toLowerCase();
-  //   const filterContactsList = this.state.contacts.filter(contact => {
-  //     return contact.name.toLowerCase().includes(normalizedFilter);
-  //   });
-  //   return filterContactsList;
-  // };
   
 const getVisibleContacts = () => {
     const normalizedFilter = filter.toLowerCase();   
@@ -97,10 +92,7 @@ const getVisibleContacts = () => {
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter),
     );
-  }
-
-  
-    console.log(contacts);
+  }  
     
     return (
       <Container>
@@ -114,7 +106,6 @@ const getVisibleContacts = () => {
         ></Contacts>
       </Container>
   )
-
 }
 
 export default App
