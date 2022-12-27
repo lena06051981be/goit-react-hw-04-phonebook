@@ -11,14 +11,14 @@ export const Contacts = ({ contactsFiltred, handleDelete }) => (
   <ContactsBlock>
     <ContactsTitle>Contacts</ContactsTitle>
     <ContactList>
-      {/* {contactsFiltred.map((contact, id) => (
+      {contactsFiltred.map((contact, id) => (
         <ContactItem key={id}>
           {contact.name}: {contact.number}
           <ContactBtn type="button" onClick={() => handleDelete(contact.id)}>
             Delete
           </ContactBtn>
         </ContactItem>
-      ))} */}
+      ))}
     </ContactList>
   </ContactsBlock>
 );

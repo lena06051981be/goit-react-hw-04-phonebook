@@ -91,13 +91,13 @@ const handleDelete = selectedId => {
   //   return filterContactsList;
   // };
   
-// const getVisibleContacts = () => {
-//     const normalizedFilter = setFilter.toLowerCase;   
+const getVisibleContacts = () => {
+    const normalizedFilter = filter.toLowerCase();   
 
-//     return setContacts.filter(contact =>
-//       contact.name.toLowerCase().includes(normalizedFilter),
-//     );
-//   }
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter),
+    );
+  }
 
   
     console.log(contacts);
@@ -109,8 +109,7 @@ const handleDelete = selectedId => {
           value={filter}
           onFilter={changeFilter} />
         <Contacts
-          // contactsFiltred={getVisibleContacts()}
-          contactsFiltred={''}
+          contactsFiltred={getVisibleContacts()}
           handleDelete={handleDelete}
         ></Contacts>
       </Container>
