@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const GET_LS_CONTACTS = JSON.parse(localStorage.getItem('contacts'));
+const GET_LS_CONTACTS = JSON.parse(window.localStorage.getItem('contacts'));
 
 const App = () => {
   const [contacts, setContacts] = useState(GET_LS_CONTACTS ?? ContactsData);
@@ -16,7 +16,7 @@ const App = () => {
   console.log(contacts);
 
   useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
+    window.localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts])
 
 const formSubmitHandler = event => {
