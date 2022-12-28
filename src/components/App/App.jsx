@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const GET_LS_CONTACTS = JSON.parse(window.localStorage.getItem('contacts'));
+// можно писать и localStorage.setItem без window - но неявное указание!
 
 const App = () => {
   const [contacts, setContacts] = useState(GET_LS_CONTACTS ?? ContactsData);
